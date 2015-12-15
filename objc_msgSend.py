@@ -1,6 +1,5 @@
 try:
     import lldb
-    from binascii import *
     import datetime
 except:
     pass
