@@ -6,7 +6,7 @@ A collection of Python scripts for instrumenting LLDB.
 
 [objc_msgSend.py](https://github.com/rotlogix/lldb-scripts/blob/master/objc_msgSend.py)
 
-### .lldbinit
+#### .lldbinit
 ```
 command script import objc_msgSend.py
 objc_msgSend
