@@ -6,6 +6,12 @@ A collection of Python scripts for instrumenting LLDB.
 
 [objc_msgSend.py](https://github.com/rotlogix/lldb-scripts/blob/master/objc_msgSend.py)
 
+### .lldbinit
+```
+command script import objc_msgSend.py
+objc_msgSend
+```
+
 #### Sample Output
 ```
 replayd : 2015-12-14 19:32:59.596294 : ID : <RPRecordingManager: 0x125612a20>
