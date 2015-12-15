@@ -19,6 +19,10 @@ def log(d, id):
             f.close()
 
 def objc_msgSend(debugger, command, result, internal_dict):
+    """
+    Setup breakpoint for objc_msgSend() and pass control to
+    a callback function
+    """
     target = debugger.GetSelectedTarget()
     breakpoint = target.BreakpointCreateByName("objc_msgSend")
     breakpoint.SetScriptCallbackFunction("objc_msgSend.getStructure")
@@ -39,18 +43,21 @@ def getStructure(frame, bp_loc, dict):
         if reg.GetName() == "x0":
             res = lldb.SBCommandReturnObject()
             interpreter = lldb.debugger.GetCommandInterpreter()
+            # This evaluates the address in x0 as an object
             interpreter.HandleCommand("expr -o -- {0}".format(reg.GetValue()), res)
             if res.Succeeded():
                 output = res.GetOutput()
                 if output:
                     print(output)
                     log("".join(["{0} : {1}".format(lldb.debugger.GetSelectedTarget(), datetime.datetime.now()), " : ID : ", output]), "ID")
+            # Get the stack-history for the given pointer inside x0
             interpreter.HandleCommand("malloc_info --stack-history {0}".format(reg.GetValue()), res)
             if res.Succeeded():
                 output = res.GetOutput()
                 if output:
                     print(output)
                     log("".join(["\n{0} : {1}".format(lldb.debugger.GetSelectedTarget(), datetime.datetime.now()), " : malloc : ", output]), "MALLOC")
+            # Get the objc_class representation within memory
             interpreter.HandleCommand("memory read --size 8 --format A --count 10 {0}".format(reg.GetValue()), res)
             if res.Succeeded():
                 output = res.GetOutput()
@@ -67,12 +74,17 @@ def getStructure(frame, bp_loc, dict):
                 if output:
                     print(output)
                     log("".join(["{0} : {1}".format(lldb.debugger.GetSelectedTarget(), datetime.datetime.now())," : SEL :", output, "\n"]), "SEL")
-
+    # Grap the target process so we can continue after
+    # our inspections
     target = lldb.debugger.GetSelectedTarget()
     process = target.GetProcess()
     process.Continue()
 
 def get_frame():
+    """
+    Get the current frame and return it
+    to the calling function
+    """
     ret = None
     for t in lldb.debugger.GetSelectedTarget().process:
         if t.GetStopReason() != lldb.eStopReasonNone and t.GetStopReason() != lldb.eStopReasonInvalid:
