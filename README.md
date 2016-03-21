@@ -5,6 +5,9 @@ A collection of Python scripts for instrumenting LLDB.
 ### Scripts
 
 [objc_msgSend.py](https://github.com/LifeForm-Labs/lldb-scripts/blob/master/objc_msgSend.py)
+[xpc.py](https://github.com/LifeForm-Labs/lldb-scripts/blob/master/xpc.py)
+
+### Example
 
 #### .lldbinit
 ```
