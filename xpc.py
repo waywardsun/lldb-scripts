@@ -53,10 +53,6 @@ def bool_breakpoint(frame, bp_loc, dict):
                     print(output)
                     log("------- KEY ------------------------------\n")
                     log("{0}".format(output))
-    # Grap the target process so we can continue after our inspections
-    #target = lldb.debugger.GetSelectedTarget()
-    #process = target.GetProcess()
-    #process.Continue()
 
 
 def string_breakpoint(frame, bp_loc, dict):
@@ -98,10 +94,6 @@ def string_breakpoint(frame, bp_loc, dict):
                     print(output)
                     log("------- KEY ------------------------------\n")
                     log("{0}".format(output))
-    # Grap the target process so we can continue after our inspections
-    #target = lldb.debugger.GetSelectedTarget()
-    #process = target.GetProcess()
-    #process.Continue()
 
 
 def uint64_breakpoint(frame, bp_loc, dict):
@@ -143,10 +135,7 @@ def uint64_breakpoint(frame, bp_loc, dict):
                     print(output)
                     log("------- KEY ------------------------------\n")
                     log("{0}".format(output))
-    # Grap the target process so we can continue after our inspections
-    #target = lldb.debugger.GetSelectedTarget()
-    #process = target.GetProcess()
-    #process.Continue()
+
 
 def int64_breakpoint(frame, bp_loc, dict):
     """
@@ -187,10 +176,7 @@ def int64_breakpoint(frame, bp_loc, dict):
                     print(output)
                     log("------- KEY ------------------------------\n")
                     log("{0}".format(output))
-    # Grap the target process so we can continue after our inspections
-    #target = lldb.debugger.GetSelectedTarget()
-    #process = target.GetProcess()
-    #process.Continue()
+
 
 def data_breakpoint(frame, bp_loc, dict):
     """
@@ -231,10 +217,6 @@ def data_breakpoint(frame, bp_loc, dict):
                     print(output)
                     log("------- KEY ------------------------------\n")
                     log("{0}".format(output))
-    # Grap the target process so we can continue after our inspections
-    #target = lldb.debugger.GetSelectedTarget()
-    #process = target.GetProcess()
-    #process.Continue()
 
 
 def xpc(debugger, command, result, internal_dict):
